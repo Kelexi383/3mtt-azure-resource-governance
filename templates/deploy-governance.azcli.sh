@@ -1,0 +1,24 @@
+#!/bin/bash
+# 3MTT Azure Governance & Resource Group Automation Script
+
+# 1. Define Environmental Variables
+LOCATION="westus"
+PROJECT="mtt-webapp"
+TAG_DEV="Environment=development Project=3mtt-labs Owner=cloud-team-dev CostCenter=cc-4401"
+TAG_PROD="Environment=production Project=3mtt-labs Owner=cloud-team-prod CostCenter=cc-9902"
+
+# 2. Create Development Lifecycle Resource Group
+echo "Provisioning Development Resource Group..."
+az group create \
+  --name "${PROJECT}-dev-${LOCATION}-rg-01" \
+  --location "$LOCATION" \
+  --tags $TAG_DEV
+
+# 3. Create Production Lifecycle Resource Group
+echo "Provisioning Production Resource Group..."
+az group create \
+  --name "${PROJECT}-prod-${LOCATION}-rg-01" \
+  --location "$LOCATION" \
+  --tags $TAG_PROD
+
+echo "Azure Resource Organization Architecture successfully initialized!"
